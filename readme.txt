@@ -1,0 +1,2 @@
+the only benifit for gen_server_registry over agents is the monitoring of buckets
+i created gen_server_registry.ex which is without monitoring to facilitate understanding the code responsible of monitoring in gen_server_registry_with_monitoring.ex
