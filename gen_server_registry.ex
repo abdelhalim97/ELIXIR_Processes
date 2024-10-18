@@ -71,5 +71,6 @@ end
 # Process.monitor(registry) #registry is the registry process pid if we give it to the monitor functinon it will return reference
 # we can use the ref value to match against the process mailbox after using flush()
 # flush()
-# even after stoping the bucket the bucket name will remain in the registry,
+
+# even after stoping using Agent.stop(bk) the bucket the bucket name will remain in the registry by using lookup,
 # will address this problem with monitoring functions in gen_server_registry_with_monitoring.ex
