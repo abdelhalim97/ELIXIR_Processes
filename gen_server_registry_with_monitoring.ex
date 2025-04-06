@@ -1,4 +1,4 @@
-defmodule GenServerRegistry do
+defmodule GenServerRegistryWithMonitoring do
   use GenServer
   # this is the same as the gen_server_registry.ex one but with monitoring
   # we changed the server without changing the client API.
@@ -23,6 +23,7 @@ defmodule GenServerRegistry do
   # Defining GenServer Callbacks(server)
   @impl true
   def init(:ok) do
+    IO.puts("start or restart the registry")
     names = %{}
     refs = %{}
     {:ok, {names, refs}}
@@ -40,6 +41,7 @@ defmodule GenServerRegistry do
     if Map.has_key?(names, name) do
       {:noreply, {names, refs}}
     else
+      IO.inspect(self())
       {:ok, bucket} = start_link([])
       ref = Process.monitor(bucket)
       refs = Map.put(refs, ref, name)
@@ -59,16 +61,16 @@ defmodule GenServerRegistry do
 
   @impl true
   def handle_info(msg, state) do
-    IO.puts("Unexpected message in GenServerRegistry: #{inspect(msg)}")
+    IO.puts("Unexpected message in GenServerRegistryWithMonitoring: #{inspect(msg)}")
 
     {:noreply, state}
   end
 end
 
 # Calling this will create a bucket process and return the {:ok , pid}
-# {:ok, registry} = GenServerRegistry.start_link([])
-# GenServerRegistry.create(registry, "shopping") this will create a bucket
-# {:ok, bucket} = GenServerRegistry.lookup(registry, "shopping")
+# {:ok, registry} = GenServerRegistryWithMonitoring.start_link([])
+# GenServerRegistryWithMonitoring.create(registry, "shopping") this will create a bucket
+# {:ok, bucket} = GenServerRegistryWithMonitoring.lookup(registry, "shopping")
 # _____________________________
 # Agent.stop(bucket) # Agent.stop(registry) wont give u feedback because we attend to monitor registry buckets not the parent registry
 # Process.monitor(registry) #registry is the registry process pid if we give it to the monitor functinon it will return reference
