@@ -1,6 +1,7 @@
 defmodule Agents do
   # Agents are simple wrappers around state. If all you want from a process is to keep state, agents are a great fit
   # When a long action is performed on the server, all other requests to that particular server will wait until the action is done
+  # its better to avoid the heavy in server side to not block the agent/but also this will create race condition if many clients trying to update same state
   use Agent
 
   def start_link() do
