@@ -26,3 +26,5 @@ defmodule MyProcess do
   # Process.alive?(pid)
   # send(pid, "Hi")
 end
+	
+# Process.info(pid) will give info for the process too Process.info(pid,:links)
