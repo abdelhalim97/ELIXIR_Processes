@@ -68,7 +68,6 @@ end
 # {:ok, bk} = GenServerRegistry.lookup(registry, "shopping")
 # _____________________________
 # Agent.stop(bk) // the linked process(registry) wont crush even both r linked coz stop send :normal is a cleans shutdown
-# Agent.stop(bk)
 # Process.monitor(registry) #registry is the registry process pid if we give it to the monitor functinon it will return reference
 # we can use the ref value to match against the process mailbox after using flush()
 # flush()
