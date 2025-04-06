@@ -25,8 +25,9 @@ defmodule DynamicSupervisorT do
   # We have to be carful about order of children and the strategies
   # _________________
 
-  # in DynamicSupervisor the children are not known upfront, but they are rather started dynamically
-  #  DynamicSupervisor does not expect a list of children during initialization, instead each child is started on demand
+  # in DynamicSupervisor does not expect a list of children during initialization coz the children are not known upfront,
+  # but they are rather started dynamically on demand, also module file is not required
+
   use Agent
   use Supervisor
 
